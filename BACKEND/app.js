@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // prevents duplicate URL entries
-app.post('/api/create', short_url)
+app.use('/api/create', short_url)
 
 app.get('/:id', async (req, res) => {
     const { id } = req.params;
