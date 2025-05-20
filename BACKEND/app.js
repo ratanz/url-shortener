@@ -5,6 +5,7 @@ dotenv.config('./.env');
 import connectDB from './src/config/mongoconfig.js';
 import urlSchema from './src/models/shorturl.model.js';
 import short_url from './src/routes/short_url.route.js';
+import { redirectFromShortUrl } from './src/controllers/short_url.controller.js';
 
 const app = express();
 
@@ -14,16 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 // prevents duplicate URL entries
 app.use('/api/create', short_url)
 
-app.get('/:id', async (req, res) => {
-    const { id } = req.params;
-    const url = await urlSchema.findOne({ short_url: id});
-    if (url) {
-        res.redirect(url.full_url);
-    }
-    else {
-        res.status(404).send('URL not found');
-    }
-});
+app.get('/:id', redirectFromShortUrl);
 
 
 app.listen(3000, () => {
