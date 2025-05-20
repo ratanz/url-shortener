@@ -1,3 +1,5 @@
+import urlSchema from "../models/shorturl.model.js";
+
 export const saveShortUrl = async (shortUrl, fullUrl, useId) => {
     const newUrl = new urlSchema({
         full_url: fullUrl,

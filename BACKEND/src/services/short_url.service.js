@@ -21,7 +21,7 @@ export const createShortUrlService = async (url) => {
     }
 }
 
-export const createShortUrlServiceUser = async (url, userId) => {
+export const createShortUrlServiceWithUser = async (url, userId) => {
     try {
         // Check if the URL already exists
         let existing = await urlSchema.findOne({ full_url: url, });
