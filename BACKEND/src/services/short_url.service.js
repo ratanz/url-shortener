@@ -7,14 +7,14 @@ export const createShortUrlService = async (url) => {
         let existing = await urlSchema.findOne({ full_url: url });
         if (existing) {
             // Return the existing short URL
-            return existing.short_url;
-
+            return existing.short_url
         }
+        
         // Create a new short URL
         const shortUrl = generateNanoId(7);
         const newUrl = new urlSchema({
             full_url: url,
-            short_url: shortUrl + '/',
+            short_url: shortUrl,
         });
         await newUrl.save();
         return shortUrl;
