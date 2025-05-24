@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Copy, Link, Loader2 } from "lucide-react"
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "motion/react"
 
 const Landing = () => {
