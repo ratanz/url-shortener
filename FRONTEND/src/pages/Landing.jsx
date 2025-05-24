@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Copy, Link, Loader2 } from "lucide-react"
+import { motion, AnimatePresence } from "motion/react"
 
 const Landing = () => {
   const [url, setUrl] = useState("")
@@ -45,7 +46,12 @@ const Landing = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4">
+    <motion.div 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      transition={{ duration: 0.5 }}
+      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4"
+    >
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
@@ -53,20 +59,53 @@ const Landing = () => {
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 w-full max-w-md">
+      <motion.div 
+        className="relative z-10 w-full max-w-md"
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
         {/* Header */}
-        <div className="text-center mb-8 animate-fade-in">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 backdrop-blur-lg rounded-2xl mb-4 border border-white/20">
+        <motion.div 
+          className="text-center mb-8"
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+        >
+          <motion.div 
+            className="inline-flex items-center justify-center w-16 h-16 bg-white/10 backdrop-blur-lg rounded-2xl mb-4 border border-white/20"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.5 }}
+          >
             <Link className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+          </motion.div>
+          <motion.h1 
+            className="text-4xl font-bold mb-2 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
             URL Shortener
-          </h1>
-          <p className="text-gray-300 text-sm">Transform your long URLs into short, shareable links</p>
-        </div>
+          </motion.h1>
+          <motion.p 
+            className="text-gray-300 text-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+          >
+            Transform your long URLs into short, shareable links
+          </motion.p>
+        </motion.div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <motion.form 
+          onSubmit={handleSubmit} 
+          className="space-y-6"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.5 }}
+        >
           <div className="backdrop-blur-xl bg-white/10 p-8 rounded-3xl border border-white/20 shadow-2xl transition-all duration-300 hover:bg-gray-300/15">
             <div className="space-y-4">
               <div className="relative">
@@ -96,12 +135,19 @@ const Landing = () => {
               </button>
             </div>
           </div>
-        </form>
+        </motion.form>
 
         {/* Success result */}
-        {shortUrl && (
-          <div className="mt-6 backdrop-blur-xl bg-green-500/10 border border-green-400/30 rounded-3xl p-6 animate-slide-up">
-            <div className="flex items-center justify-between">
+        <AnimatePresence>
+          {shortUrl && (
+            <motion.div 
+              className="mt-6 backdrop-blur-xl bg-green-500/10 border border-green-400/30 rounded-3xl p-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="flex items-center justify-between">
               <div className="flex-1 min-w-0">
                 <p className="text-green-300 text-sm font-medium mb-2">Your shortened URL:</p>
                 <a
@@ -123,50 +169,45 @@ const Landing = () => {
                 />
               </button>
             </div>
-            {copied && <p className="text-green-400 text-xs mt-2 animate-fade-in">Copied to clipboard!</p>}
-          </div>
-        )}
+            {copied && (
+              <motion.p 
+                className="text-green-400 text-xs mt-2"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                Copied to clipboard!
+              </motion.p>
+            )}
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Error message */}
-        {error && (
-          <div className="mt-6 backdrop-blur-xl bg-red-500/10 border border-red-400/30 rounded-3xl p-6 animate-slide-up">
-            <p className="text-red-300 text-sm">{error}</p>
-          </div>
-        )}
-      </div>
+        <AnimatePresence>
+          {error && (
+            <motion.div 
+              className="mt-6 backdrop-blur-xl bg-red-500/10 border border-red-400/30 rounded-3xl p-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+            >
+              <motion.p 
+                className="text-red-300 text-sm"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+              >
+                {error}
+              </motion.p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
 
-      <style jsx>{`
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes slide-up {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fade-in {
-          animation: fade-in 0.6s ease-out;
-        }
-
-        .animate-slide-up {
-          animation: slide-up 0.4s ease-out;
-        }
-      `}</style>
-    </div>
+ 
+    </motion.div>
   )
 }
 
