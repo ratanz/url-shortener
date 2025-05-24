@@ -1,11 +1,13 @@
 import React from 'react'
-
+import Landing from './pages/Landing'
 const App = () => {
+
+
   return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
-  )
+   <div>
+    <Landing />
+   </div>
+  );
 }
 
 export default App
