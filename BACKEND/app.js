@@ -1,6 +1,7 @@
 import express from 'express';
 import { nanoid } from 'nanoid';
 import dotenv from 'dotenv';
+import cors from 'cors';
 dotenv.config('./.env');
 import connectDB from './src/config/mongoconfig.js';
 import urlSchema from './src/models/shorturl.model.js';
@@ -12,6 +13,13 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Enable CORS for frontend requests
+app.use(cors({
+  origin: ['http://localhost:5173', 'http://127.0.0.1:5173'], // Vite default port
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
 
 // prevents duplicate URL entries
 app.use('/api/create', short_url)
