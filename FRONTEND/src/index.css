@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: 'Gravenora';
+  src: url('/fonts/Gravenora.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  font-family: 'Gravenora', sans-serif;
+}
+
+body {
+  font-family: 'Gravenora', sans-serif;
+}
