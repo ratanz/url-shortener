@@ -151,36 +151,6 @@ const Landing = () => {
       animate="visible"
       className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-black via-zinc-900 to-black p-4"
     >
-      {/* Enhanced background decoration */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          className="absolute -top-40 -right-40 w-80 h-80 bg-zinc-400 rounded-full mix-blend-multiply filter blur-xl opacity-20"
-          animate={{
-            scale: [1, 1.2, 1],
-            x: [0, 50, 0],
-            y: [0, -30, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute -bottom-40 -left-40 w-80 h-80 bg-gray-500 rounded-full mix-blend-multiply filter blur-xl opacity-20"
-          animate={{
-            scale: [1.2, 1, 1.2],
-            x: [0, -50, 0],
-            y: [0, 30, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-            delay: 4,
-          }}
-        />
-      </div>
 
       {/* Main content */}
       <motion.div className="relative z-10 w-full max-w-md" variants={itemVariants}>
