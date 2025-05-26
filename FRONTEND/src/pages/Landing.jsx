@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Copy, Link, Loader2 } from "lucide-react"
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "motion/react"
+import axios from "axios"
 
 const Landing = () => {
   const [url, setUrl] = useState("")
@@ -18,19 +19,10 @@ const Landing = () => {
     setError("")
     setShortUrl("")
     try {
-      const response = await fetch("http://localhost:3000/api/create", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url }),
-      })
-      if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.error || "Failed to shorten URL")
-      }
-      const data = await response.text()
-      setShortUrl(data)
+      const response = await axios.post("http://localhost:3000/api/create", { url })
+      setShortUrl(response.data)
     } catch (err) {
-      setError(err.message)
+      setError(err.response?.data?.error || err.message || "Failed to shorten URL")
     } finally {
       setLoading(false)
     }
