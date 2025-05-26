@@ -19,8 +19,8 @@ const Landing = () => {
     setError("")
     setShortUrl("")
     try {
-      const response = await axios.post("http://localhost:3000/api/create", { url })
-      setShortUrl(response.data)
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/create`, { url })
+      setShortUrl(response.data)  
     } catch (err) {
       setError(err.response?.data?.error || err.message || "Failed to shorten URL")
     } finally {
