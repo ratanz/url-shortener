@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Copy, Link, Loader2 } from "lucide-react"
 // eslint-disable-next-line no-unused-vars
-import { motion, AnimatePresence } from "motion/react"
+import { motion, AnimatePresence, scale } from "motion/react"
 import axios from "axios"
 
 const Landing = () => {
@@ -52,32 +52,30 @@ const Landing = () => {
   }
 
   const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
+    hidden: { y: 40, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.6,
+        duration: 0.7,
         ease: "easeOut",
       },
     },
   }
 
   const iconVariants = {
-    hidden: { scale: 0, rotate: -180 },
+    hidden: { scale: 0 },
     visible: {
       scale: 1,
-      rotate: 0,
       transition: {
         type: "spring",
-        stiffness: 200,
-        damping: 15,
-        delay: 0.3,
+        stiffness: 100,
+        damping: 45,
+        delay: 0.1,
       },
     },
     hover: {
       scale: 1.1,
-      rotate: 5,
       transition: {
         duration: 0.2,
       },
@@ -85,14 +83,18 @@ const Landing = () => {
   }
 
   const formVariants = {
-    hidden: { y: 50, opacity: 0 },
+    hidden: { y: 100, opacity: 0 , scale : 0.5},
     visible: {
       y: 0,
       opacity: 1,
+      scale : 1,
       transition: {
         duration: 0.8,
         ease: "easeOut",
         delay: 0.4,
+        damping: 50,
+        stiffness : 10,
+        bounce: 0.5,
       },
     },
   }
