@@ -83,7 +83,7 @@ const Landing = () => {
   }
 
   const formVariants = {
-    hidden: { y: 100, opacity: 0 , scale : 0.5},
+    hidden: { y: 20, opacity: 0 , scale : 0.5},
     visible: {
       y: 0,
       opacity: 1,
@@ -127,13 +127,13 @@ const Landing = () => {
     focus: {
       scale: 1.02,
       transition: {
-        duration: 0.2,
+        duration: 0.3,
       },
     },
     blur: {
       scale: 1,
       transition: {
-        duration: 0.2,
+        duration: 0.3,
       },
     },
   }
@@ -169,7 +169,7 @@ const Landing = () => {
 
           <motion.p
             className="text-gray-300 text-sm"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
           >
@@ -187,18 +187,18 @@ const Landing = () => {
             }}
             transition={{ duration: 0.3 }}
           >
-            <div className="space-y-4">
+            <div className="input-box space-y-4">
               <motion.div className="relative" variants={inputVariants} whileFocus="focus" initial="blur">
                 <motion.input
                   type="url"
-                  className="w-full bg-white/10 backdrop-blur-sm border border-white/30 rounded-2xl px-6 py-4 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:border-transparent transition-all duration-300 hover:bg-white/15"
+                  className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-6 py-4 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:border-transparent transition-all duration-300 hover:bg-white/15"
                   placeholder="Enter your URL here..."
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   required
                   whileFocus={{
                     borderColor: "rgba(113, 113, 122, 0.5)",
-                    boxShadow: "0 0 0 3px rgba(113, 113, 122, 0.1)",
+                    boxShadow: "0 0 0 3px rgba(113, 113, 122, 0.2)",
                   }}
                 />
               </motion.div>
