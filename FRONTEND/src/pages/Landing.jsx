@@ -1,10 +1,20 @@
 "use client"
 
 import { useState } from "react"
-import { Copy, Link, Loader2 } from "lucide-react"
+import { Copy, Link, Loader2, Github, Twitter } from "lucide-react"
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence, scale } from "motion/react"
 import axios from "axios"
+// import { QueryClient, useQuery, useMutation } from "@tanstack/react-query"
+import { 
+  containerVariants, 
+  itemVariants, 
+  iconVariants, 
+  formVariants, 
+  buttonVariants, 
+  inputVariants } from "../utils/Animation"
+
+import Footer from "../components/Footer"
 
 const Landing = () => {
   const [url, setUrl] = useState("")
@@ -12,6 +22,7 @@ const Landing = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [copied, setCopied] = useState(false)
+  // const queryClient = new QueryClient()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -38,105 +49,14 @@ const Landing = () => {
     }
   }
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.7,
-        staggerChildren: 0.3,
-        delayChildren: 0.2,
-      },
-    },
-  }
+  // const query = useQuery({ queryKey: ['todos'], queryFn: handleSubmit })
 
-  const itemVariants = {
-    hidden: { y: 40, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.7,
-        ease: "easeOut",
-      },
-    },
-  }
-
-  const iconVariants = {
-    hidden: { scale: 0 },
-    visible: {
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 45,
-        delay: 0.1,
-      },
-    },
-    hover: {
-      scale: 1.1,
-      transition: {
-        duration: 0.2,
-      },
-    },
-  }
-
-  const formVariants = {
-    hidden: { y: 20, opacity: 0 , scale : 0.5},
-    visible: {
-      y: 0,
-      opacity: 1,
-      scale : 1,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-        delay: 0.4,
-        damping: 50,
-        stiffness : 10,
-        bounce: 0.5,
-      },
-    },
-  }
-
-  const buttonVariants = {
-    idle: { scale: 1 },
-    hover: {
-      transition: {
-        duration: 0.2,
-        ease: "easeInOut",
-      },
-    },
-    tap: {
-      scale: 0.98,
-      transition: {
-        duration: 0.1,
-      },
-    },
-    loading: {
-      scale: [1, 1.02, 1],
-      transition: {
-        duration: 1,
-        repeat: Number.POSITIVE_INFINITY,
-        ease: "easeInOut",
-      },
-    },
-  }
-
-  const inputVariants = {
-    focus: {
-      scale: 1.02,
-      transition: {
-        duration: 0.3,
-      },
-    },
-    blur: {
-      scale: 1,
-      transition: {
-        duration: 0.3,
-      },
-    },
-  }
+  // const mutation = useMutation({
+  //   mutationFn: handleSubmit,
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries({ queryKey: ['todos'] })
+  //   },
+  // })
 
   return (
     <motion.div
@@ -341,7 +261,9 @@ const Landing = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
       </motion.div>
+      <Footer />
     </motion.div>
   )
 }
