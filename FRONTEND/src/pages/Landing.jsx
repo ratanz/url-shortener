@@ -44,9 +44,9 @@ const Landing = () => {
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.6,
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
+        duration: 0.7,
+        staggerChildren: 0.3,
+        delayChildren: 0.2,
       },
     },
   }
