@@ -115,7 +115,7 @@ export const socialIconVariants = {
     scale: 1.2,
     rotate: [0, -10, 10, -5, 5, 0],
     transition: {
-      duration: 0.3,
+      duration: 0.2,
       ease: "easeInOut",
     },
   },
