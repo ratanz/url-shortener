@@ -5,7 +5,7 @@ import { Copy, Link, Loader2, Github, Twitter } from "lucide-react"
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence, scale } from "motion/react"
 import axios from "axios"
-// import { QueryClient, useQuery, useMutation } from "@tanstack/react-query"
+import { QueryClient, useQuery, useMutation } from "@tanstack/react-query"
 import { 
   containerVariants, 
   itemVariants, 
@@ -22,7 +22,7 @@ const Landing = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [copied, setCopied] = useState(false)
-  // const queryClient = new QueryClient()
+  const queryClient = new QueryClient()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -49,14 +49,6 @@ const Landing = () => {
     }
   }
 
-  // const query = useQuery({ queryKey: ['todos'], queryFn: handleSubmit })
-
-  // const mutation = useMutation({
-  //   mutationFn: handleSubmit,
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({ queryKey: ['todos'] })
-  //   },
-  // })
 
   return (
     <motion.div
