@@ -3,9 +3,8 @@
 import { useState } from "react"
 import { Copy, Link, Loader2, Github, Twitter } from "lucide-react"
 // eslint-disable-next-line no-unused-vars
-import { motion, AnimatePresence, scale } from "motion/react"
+import { motion, AnimatePresence } from "motion/react"
 import axios from "axios"
-import { QueryClient, useQuery, useMutation } from "@tanstack/react-query"
 import { 
   containerVariants, 
   itemVariants, 
