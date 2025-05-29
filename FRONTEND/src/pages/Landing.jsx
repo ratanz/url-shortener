@@ -13,7 +13,7 @@ import {
   formVariants, 
   buttonVariants, 
   inputVariants } from "../utils/Animation"
-
+import { createShortUrl } from "../api/shortUrl.api"
 import Footer from "../components/Footer"
 
 const Landing = () => {
@@ -22,7 +22,6 @@ const Landing = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [copied, setCopied] = useState(false)
-  const queryClient = new QueryClient()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -30,8 +29,8 @@ const Landing = () => {
     setError("")
     setShortUrl("")
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/create`, { url })
-      setShortUrl(response.data)  
+      const shortUrl = await createShortUrl(url)
+      setShortUrl(shortUrl)  
     } catch (err) {
       setError(err.response?.data?.error || err.message || "Failed to shorten URL")
     } finally {
