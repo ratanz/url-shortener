@@ -4,7 +4,6 @@ import { useState } from "react"
 import { Copy, Link, Loader2, Github, Twitter } from "lucide-react"
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "motion/react"
-import axios from "axios"
 import { 
   containerVariants, 
   itemVariants, 
