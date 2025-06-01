@@ -8,6 +8,8 @@ import urlSchema from './src/models/shorturl.model.js';
 import short_url from './src/routes/short_url.route.js';
 import { redirectFromShortUrl } from './src/controllers/short_url.controller.js';
 import { errorHandler } from './src/utils/errorHandler.js';
+import auth from './src/routes/auth.route.js';
+import protected_routes from './src/routes/protected.route.js';
 
 const app = express();
 
@@ -21,8 +23,10 @@ app.use(cors({
   credentials: true
 }));
 
-// prevents duplicate URL entries
+// API routes
+app.use('/api/auth', auth)
 app.use('/api/create', short_url)
+app.use('/api/protected', protected_routes)
 
 app.get('/:id', redirectFromShortUrl);
 

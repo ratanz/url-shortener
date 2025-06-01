@@ -1,7 +1,9 @@
 "use client"
 
-import { useState } from "react"
-import { Copy, Link, Loader2, Github, Twitter } from "lucide-react"
+import { useState, useEffect } from "react"
+import { Copy, Link, Loader2, Github, Twitter, LogIn, UserPlus, LogOut, User } from "lucide-react"
+import { Link as RouterLink } from "react-router-dom"
+
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "motion/react"
 import { 
@@ -12,6 +14,7 @@ import {
   buttonVariants, 
   inputVariants } from "../utils/Animation"
 import { createShortUrl } from "../api/shortUrl.api"
+import { isAuthenticated, getCurrentUser, logoutUser } from "../api/auth.api"
 import Footer from "../components/Footer"
 
 const Landing = () => {
@@ -20,6 +23,14 @@ const Landing = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [copied, setCopied] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [user, setUser] = useState(null)
+  
+  // Check authentication status on component mount
+  useEffect(() => {
+    setIsLoggedIn(isAuthenticated())
+    setUser(getCurrentUser())
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -45,6 +56,12 @@ const Landing = () => {
       console.error("Failed to copy:", err)
     }
   }
+  
+  const handleLogout = () => {
+    logoutUser()
+    setIsLoggedIn(false)
+    setUser(null)
+  }
 
 
   return (
@@ -54,7 +71,55 @@ const Landing = () => {
       animate="visible"
       className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-black via-zinc-900 to-black p-4"
     >
-
+      {/* Auth buttons */}
+        <motion.div 
+          className="flex absolute top-4 right-4 gap-2 "
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          {isLoggedIn ? (
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1 text-white/70 text-sm">
+                <User className="w-4 h-4" />
+                <span>{user?.name || 'User'}</span>
+              </div>
+              <motion.button
+                onClick={handleLogout}
+                className="flex items-center gap-1 bg-white/10 backdrop-blur-xl px-3 py-1.5 rounded-xl text-sm text-white transition-colors duration-300 cursor-pointer"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <LogOut className="w-4 h-4" />
+                Logout
+              </motion.button>
+            </div>
+          ) : (
+            <>
+              <RouterLink to="/login">
+                <motion.button
+                  className="flex items-center gap-1 bg-zinc/10 backdrop-blur-xl  px-3 py-1.5 rounded-xl text-sm text-white transition-colors duration-300 cursor-pointer"
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <LogIn className="w-4 h-4" />
+                  Login
+                </motion.button>
+              </RouterLink>
+              <RouterLink to="/register">
+                <motion.button
+                  className="flex items-center gap-1 bg-zinc/10 backdrop-blur-xl px-3 py-1.5 rounded-xl text-sm text-white transition-colors duration-300 cursor-pointer"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <UserPlus className="w-4 h-4" />
+                  Register
+                </motion.button>
+              </RouterLink>
+            </>
+          )}
+        </motion.div>
+      
       {/* Main content */}
       <motion.div className="relative z-10 w-full max-w-md" variants={itemVariants}>
         {/* Header */}
