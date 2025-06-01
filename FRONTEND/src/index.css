@@ -12,7 +12,11 @@
   font-family: 'Gravenora', sans-serif;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   font-family: 'Gravenora', sans-serif;
-  overflow: hidden;
+  /* overflow: hidden; */
 }

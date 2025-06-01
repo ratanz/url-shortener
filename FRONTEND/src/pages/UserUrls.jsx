@@ -34,33 +34,34 @@ const UserUrls = () => {
   const [error, setError] = useState("")
   const [copiedId, setCopiedId] = useState(null)
 
-  useEffect(() => {
-    const fetchUserUrls = async () => {
-      try {
-        setLoading(true)
-        const response = await getUserUrls()
-        console.log('UserUrls response:', response)
-        
-        // Handle different response formats
-        if (response.data) {
-          setUrls(response.data)
-        } else if (Array.isArray(response)) {
-          setUrls(response)
-        } else if (response.success && Array.isArray(response.data)) {
-          setUrls(response.data)
-        } else {
-          console.warn('Unexpected response format:', response)
-          setUrls([])
-        }
-        
-        setLoading(false)
-      } catch (error) {
-        console.error('Error fetching URLs:', error)
-        setError(error.message || "Failed to load your URLs. Please try again later.")
-        setLoading(false)
+  const fetchUserUrls = async () => {
+    try {
+      setLoading(true)
+      setError("")
+      
+      const response = await getUserUrls()
+      console.log('UserUrls response:', response)
+      
+      // Handle different response formats
+      if (response.data) {
+        setUrls(response.data)
+      } else if (Array.isArray(response)) {
+        setUrls(response)
+      } else if (response.success && Array.isArray(response.data)) {
+        setUrls(response.data)
+      } else {
+        console.warn('Unexpected response format:', response)
+        setUrls([])
       }
+    } catch (error) {
+      console.error('Error fetching URLs:', error)
+      setError(error.message || "Failed to load your URLs. Please try again later.")
+    } finally {
+      setLoading(false)
     }
+  }
 
+  useEffect(() => {
     fetchUserUrls()
   }, [])
 

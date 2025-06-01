@@ -170,10 +170,10 @@ const Profile = () => {
 
         {/* Back to home */}
         <motion.div
-          className="absolute top-4 left-4"
-          initial={{ opacity: 0, y: -20 }}
+          className="absolute -bottom-20 left-1/2 transform -translate-x-1/2"
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 1, ease: "easeOut" }}
         >
           <RouterLink
             to="/"
