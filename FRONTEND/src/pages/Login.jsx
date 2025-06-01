@@ -14,7 +14,6 @@ import {
   inputVariants 
 } from "../utils/Animation"
 import { loginUser } from "../api/auth.api"
-import Footer from "../components/Footer"
 
 const Login = () => {
   const [email, setEmail] = useState("")
@@ -176,9 +175,9 @@ const Login = () => {
         {/* Back to home */}
         <motion.div
           className="mt-6 text-center"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
+          transition={{ delay: 1.5 , duration: 0.6 , ease: "easeOut" }}
         >
           <RouterLink
             to="/"
@@ -216,7 +215,6 @@ const Login = () => {
           )}
         </AnimatePresence>
       </motion.div>
-      <Footer />
     </motion.div>
   )
 }

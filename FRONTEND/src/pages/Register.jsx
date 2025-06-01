@@ -14,7 +14,6 @@ import {
   inputVariants 
 } from "../utils/Animation"
 import { registerUser } from "../api/auth.api"
-import Footer from "../components/Footer"
 
 const Register = () => {
   const [name, setName] = useState("")
@@ -192,9 +191,9 @@ const Register = () => {
         {/* Back to home */}
         <motion.div
           className="mt-6 text-center"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
+          transition={{ delay: 1.5 , duration: 0.6 , ease: "easeOut" }}
         >
           <RouterLink
             to="/"
@@ -232,7 +231,6 @@ const Register = () => {
           )}
         </AnimatePresence>
       </motion.div>
-      <Footer />
     </motion.div>
   )
 }
