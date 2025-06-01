@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Copy, Link, Loader2, Github, Twitter, LogIn, UserPlus, LogOut, User } from "lucide-react"
+import { Copy, Link, Loader2, Github, Twitter, LogIn, UserPlus, LogOut } from "lucide-react"
 import { Link as RouterLink } from "react-router-dom"
 
 // eslint-disable-next-line no-unused-vars
@@ -16,6 +16,7 @@ import {
 import { createShortUrl } from "../api/shortUrl.api"
 import { isAuthenticated, getCurrentUser, logoutUser } from "../api/auth.api"
 import Footer from "../components/Footer"
+import UserDropdown from "../components/UserDropdown"
 
 const Landing = () => {
   const [url, setUrl] = useState("")
@@ -80,10 +81,7 @@ const Landing = () => {
         >
           {isLoggedIn ? (
             <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1 text-white/70 text-sm">
-                <User className="w-4 h-4" />
-                <span>{user?.name || 'User'}</span>
-              </div>
+              <UserDropdown user={user} />
               <motion.button
                 onClick={handleLogout}
                 className="flex items-center gap-1 bg-white/10 backdrop-blur-xl px-3 py-1.5 rounded-xl text-sm text-white transition-colors duration-300 cursor-pointer"

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Link as RouterLink, useNavigate } from "react-router-dom"
-import { User, Loader2, ArrowLeft } from "lucide-react"
+import { User, Loader2, ArrowLeft, Eye, EyeOff, Lock } from "lucide-react"
 // eslint-disable-next-line no-unused-vars
 import { AnimatePresence, motion } from "motion/react"
 import { 
@@ -18,6 +18,7 @@ import { loginUser } from "../api/auth.api"
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const navigate = useNavigate()
@@ -104,7 +105,7 @@ const Login = () => {
 
               <motion.div className="relative" variants={inputVariants} whileFocus="focus" initial="blur">
                 <motion.input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-6 py-4 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:border-transparent transition-all duration-300 hover:bg-white/15"
                   placeholder="Password"
                   value={password}
@@ -115,6 +116,17 @@ const Login = () => {
                     boxShadow: "0 0 0 3px rgba(113, 113, 122, 0.2)",
                   }}
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-6 top-4 text-white/50 hover:text-white transition-colors duration-300"
+                >
+                  {showPassword ? (
+                    <EyeOff className="w-4 h-4" />
+                  ) : (
+                    <Eye className="w-4 h-4" />
+                  )}
+                </button>
               </motion.div>
 
               <motion.button
