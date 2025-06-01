@@ -1,16 +1,43 @@
 ;
 import { getShortUrl } from "../dao/short_url.js";
-import { createShortUrlService } from "../services/short_url.service.js";
+import { createShortUrlService, createShortUrlServiceWithUser } from "../services/short_url.service.js";
 
 export const createShortUrl = async (req, res) => {
     try {
         const { url } = req.body;
-        const shortUrl = await createShortUrlService(url);
+        let userId = null;
+        
+        // Check if the request has an authenticated user
+        if (req.headers.authorization) {
+            const token = req.headers.authorization.split(' ')[1];
+            if (token) {
+                try {
+                    // Import the verify token function
+                    const { verifyToken } = await import('../utils/helper.js');
+                    const decoded = verifyToken(token);
+                    if (decoded && decoded.id) {
+                        userId = decoded.id;
+                        console.log('Creating URL for authenticated user:', userId);
+                    }
+                } catch (tokenError) {
+                    console.error('Token verification error:', tokenError);
+                    // Continue without user ID if token is invalid
+                }
+            }
+        }
+        
+        // Use the appropriate service based on whether user is authenticated
+        const shortUrl = userId 
+            ? await createShortUrlServiceWithUser(url, userId)
+            : await createShortUrlService(url);
+            
         if (shortUrl instanceof Error) {
             return res.status(500).json({ error: "Failed to create short URL" });
         }
-        res.send(process.env.APP_URL + shortUrl);
+        // Return the full URL including the backend server address
+        res.send(`http://localhost:3000/${shortUrl}`);
     } catch (error) {
+        console.error('Error in createShortUrl controller:', error);
         res.status(500).json({ error: "Internal server error" });
     }
 }

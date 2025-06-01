@@ -109,6 +109,8 @@ export const isLoggedIn = () => {
 // Get user URLs
 export const getUserUrls = async () => {
   try {
+    console.log('Fetching user URLs with token:', localStorage.getItem('token') ? 'Token exists' : 'No token');
+    
     // Create a new axios instance for protected routes
     const protectedAPI = axios.create({
       baseURL: 'http://localhost:3000/api/protected',
@@ -119,10 +121,20 @@ export const getUserUrls = async () => {
       }
     });
     
-    const { data } = await protectedAPI.get('/urls');
-    return data;
+    const response = await protectedAPI.get('/urls');
+    console.log('User URLs response:', response.data);
+    
+    // Return the data directly to be handled by the component
+    return response.data;
   } catch (error) {
-    logError(error);
+    console.error('Error fetching user URLs:', error);
+    if (error.response) {
+      console.error('Server response:', error.response.status, error.response.data);
+    } else if (error.request) {
+      console.error('No response received:', error.request);
+    } else {
+      console.error('Request error:', error.message);
+    }
     throw error.response?.data || { message: "Failed to fetch URLs. Please try again." };
   }
 };

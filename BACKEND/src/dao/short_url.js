@@ -1,16 +1,23 @@
 import urlSchema from "../models/shorturl.model.js";
 import { ConflictError } from "../utils/errorHandler.js";
 
-export const saveShortUrl = async (shortUrl, fullUrl, useId) => {
+export const saveShortUrl = async (shortUrl, fullUrl, userId) => {
     try {
+        console.log('Saving URL with user ID:', userId || 'anonymous');
+        
         const newUrl = new urlSchema({
             full_url: fullUrl,
             short_url: shortUrl,
         });
-        if (useId) {
-            newUrl.user = useId;
+        
+        // Associate URL with user if userId is provided
+        if (userId) {
+            newUrl.user = userId;
         }
-        await newUrl.save();
+        
+        const savedUrl = await newUrl.save();
+        console.log('URL saved successfully:', savedUrl);
+        return savedUrl;
     } catch (error) {
         if (error.code === 11000) {
             throw new ConflictError("Short URL already exists");

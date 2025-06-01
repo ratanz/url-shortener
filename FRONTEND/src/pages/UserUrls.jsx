@@ -11,7 +11,22 @@ import {
   formVariants
 } from "../utils/Animation"
 import { getUserUrls } from "../api/auth.api"
-import { formatDistanceToNow } from "date-fns"
+import { formatDistanceToNow, isValid } from "date-fns"
+
+// Helper function to safely format dates
+const safeFormatDate = (dateString) => {
+  try {
+    if (!dateString) return 'Recently created';
+    
+    const date = new Date(dateString);
+    if (!isValid(date)) return 'Recently created';
+    
+    return formatDistanceToNow(date, { addSuffix: true });
+  } catch (error) {
+    console.error('Date formatting error:', error);
+    return 'Recently created';
+  }
+}
 
 const UserUrls = () => {
   const [urls, setUrls] = useState([])
@@ -50,7 +65,7 @@ const UserUrls = () => {
   }, [])
 
   const handleCopy = (shortUrl, id) => {
-    navigator.clipboard.writeText(`${window.location.origin}/${shortUrl}`)
+    navigator.clipboard.writeText(`http://localhost:3000/${shortUrl}`)
     setCopiedId(id)
     setTimeout(() => setCopiedId(null), 2000)
   }
@@ -167,12 +182,12 @@ const UserUrls = () => {
                       <div className="flex-1 min-w-0">
                         <p className="text-white/50 text-xs mb-1 flex items-center">
                           <Calendar className="w-3 h-3 mr-1" />
-                          {formatDistanceToNow(new Date(url.createdAt), { addSuffix: true })}
+                          {safeFormatDate(url.createdAt)}
                         </p>
                         <p className="text-white font-medium truncate">{url.full_url}</p>
                         <div className="flex items-center mt-1">
                           <span className="text-emerald-400/90 text-sm truncate">
-                            {`${window.location.origin}/${url.short_url}`}
+                            {`http://localhost:3000/${url.short_url}`}
                           </span>
                         </div>
                       </div>
@@ -191,7 +206,7 @@ const UserUrls = () => {
                           )}
                         </motion.button>
                         <motion.a
-                          href={`${window.location.origin}/${url.short_url}`}
+                          href={`http://localhost:3000/${url.short_url}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-1 bg-white/10 backdrop-blur-xl p-2 rounded-xl text-white/80 transition-colors duration-300"
