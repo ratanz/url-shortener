@@ -78,7 +78,7 @@ const UserUrls = () => {
       animate="visible"
       className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-black via-zinc-900 to-black p-4"
     >
-      <motion.div className="relative z-10 w-full max-w-3xl" variants={itemVariants}>
+      <motion.div className="relative z-10 w-full max-w-3xl mt-5" variants={itemVariants}>
         {/* Header */}
         <motion.div className="text-center mb-8" variants={itemVariants}>
           <motion.div
@@ -104,9 +104,9 @@ const UserUrls = () => {
         {/* Back to home */}
         <motion.div
           className="absolute top-4 left-4"
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
         >
           <RouterLink
             to="/"

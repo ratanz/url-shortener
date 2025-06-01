@@ -80,11 +80,11 @@ const Landing = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           {isLoggedIn ? (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1">
               <UserDropdown user={user} />
               <motion.button
                 onClick={handleLogout}
-                className="flex items-center gap-1 bg-white/10 backdrop-blur-xl px-3 py-1.5 rounded-xl text-sm text-white transition-colors duration-300 cursor-pointer"
+                className="flex items-center gap-1 bg-white/10 backdrop-blur-xl px-2 py-1 rounded-xl text-sm text-white transition-colors duration-300 cursor-pointer"
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.98 }}
               >
