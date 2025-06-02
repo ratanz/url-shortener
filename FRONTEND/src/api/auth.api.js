@@ -115,7 +115,9 @@ export const getUserUrls = async () => {
     
     // Create a new axios instance for protected routes
     const protectedAPI = axios.create({
-      baseURL: `${import.meta.env.VITE_API_URL}/protected`,
+      baseURL: import.meta.env.VITE_API_URL.endsWith('/') 
+        ? `${import.meta.env.VITE_API_URL}api/protected`
+        : `${import.meta.env.VITE_API_URL}/api/protected`,
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json',
@@ -146,7 +148,9 @@ export const getUserProfile = async () => {
   try {
     // Create a new axios instance for protected routes
     const protectedAPI = axios.create({
-      baseURL: `${import.meta.env.VITE_API_URL}/protected`,
+      baseURL: import.meta.env.VITE_API_URL.endsWith('/') 
+        ? `${import.meta.env.VITE_API_URL}api/protected`
+        : `${import.meta.env.VITE_API_URL}/api/protected`,
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json',
@@ -167,7 +171,9 @@ export const updateUserProfile = async (userData) => {
   try {
     // Create a new axios instance for protected routes
     const protectedAPI = axios.create({
-      baseURL: `${import.meta.env.VITE_API_URL}/protected`,
+      baseURL: import.meta.env.VITE_API_URL.endsWith('/') 
+        ? `${import.meta.env.VITE_API_URL}api/protected`
+        : `${import.meta.env.VITE_API_URL}/api/protected`,
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json',
@@ -200,12 +206,12 @@ const DEBUG = true;
 const logError = (error) => {
   if (!DEBUG) return;
   
+  console.error('API Error:', error);
   if (error.response) {
-    console.error('Server error:', error.response.status, error.response.data);
+    console.error('Server response:', error.response.status, error.response.data);
   } else if (error.request) {
-    console.error('Network error:', error.request);
+    console.error('No response received:', error.request);
   } else {
     console.error('Request error:', error.message);
   }
-  return error; // Return the error for chaining
 };
