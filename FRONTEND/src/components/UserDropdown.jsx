@@ -52,7 +52,7 @@ const UserDropdown = ({ user }) => {
             <div className="py-1">
               <RouterLink to="/urls">
                 <motion.div
-                  className="flex items-center gap-2 px-4 py-2 text-sm text-white/80 hover:bg-white/10"
+                  className="flex items-center gap-2 px-4 py-2 text-sm text-white/80"
                   whileHover={{ x: 5 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
@@ -62,7 +62,7 @@ const UserDropdown = ({ user }) => {
               </RouterLink>
               <RouterLink to="/profile">
                 <motion.div
-                  className="flex items-center gap-2 px-4 py-2 text-sm text-white/80 hover:bg-white/10"
+                  className="flex items-center gap-2 px-4 py-2 text-sm text-white/80"
                   whileHover={{ x: 5 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
