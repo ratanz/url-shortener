@@ -19,7 +19,6 @@ app.use(express.urlencoded({ extended: true }));
 // Enable CORS for frontend requests
 const allowedOrigins = [
   'http://localhost:5173', // Development environment
-  'https://url-shortener-xi-woad.vercel.app', // Hardcoded Vercel URL for testing
   process.env.FRONTEND_URL // Production frontend URL from environment variable
 ]
 
