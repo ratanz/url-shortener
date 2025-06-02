@@ -24,7 +24,7 @@ const apiUrl = import.meta.env.VITE_API_URL.endsWith('/')
 console.log('API URL:', apiUrl);
 
 const {data} = await axios.post(apiUrl, { url }, {
-      timeout: 10000, // 10 seconds timeout
+      timeout: 10000, 
       headers
     })
     return data
