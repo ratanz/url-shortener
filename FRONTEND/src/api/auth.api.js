@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create axios instance with base configuration
 const authAPI = axios.create({
-  baseURL: `http://localhost:3000/api/auth`,
+  baseURL: `${import.meta.env.VITE_API_URL}/auth`,
   timeout: 10000, // 10 seconds timeout
   headers: {
     'Content-Type': 'application/json'
@@ -113,7 +113,7 @@ export const getUserUrls = async () => {
     
     // Create a new axios instance for protected routes
     const protectedAPI = axios.create({
-      baseURL: 'http://localhost:3000/api/protected',
+      baseURL: `${import.meta.env.VITE_API_URL}/protected`,
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json',
@@ -144,7 +144,7 @@ export const getUserProfile = async () => {
   try {
     // Create a new axios instance for protected routes
     const protectedAPI = axios.create({
-      baseURL: 'http://localhost:3000/api/protected',
+      baseURL: `${import.meta.env.VITE_API_URL}/protected`,
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json',
@@ -165,7 +165,7 @@ export const updateUserProfile = async (userData) => {
   try {
     // Create a new axios instance for protected routes
     const protectedAPI = axios.create({
-      baseURL: 'http://localhost:3000/api/protected',
+      baseURL: `${import.meta.env.VITE_API_URL}/protected`,
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json',
