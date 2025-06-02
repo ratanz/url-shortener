@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: url-shortener-api
+    runtime: node
+    rootDir: BACKEND
+    buildCommand: npm install
+    startCommand: node app.js
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: PORT
+        value: 3000
+      - key: APP_URL
+        sync: false
