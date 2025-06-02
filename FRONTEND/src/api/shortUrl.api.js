@@ -16,12 +16,8 @@ export const createShortUrl = async (url) => {
     
     console.log('Creating short URL with auth:', token ? 'User is authenticated' : 'Anonymous user');
     
-    // Get the base API URL without the /api suffix if it exists
-let baseApiUrl = import.meta.env.VITE_API_URL;
-// If VITE_API_URL ends with /api, we need to remove it since we'll add the full path
-if (baseApiUrl.endsWith('/api')) {
-  baseApiUrl = baseApiUrl.slice(0, -4); // Remove the /api suffix
-}
+    // Construct the API URL with the standardized base URL
+const baseApiUrl = import.meta.env.VITE_API_URL;
 
 // Ensure we don't have double slashes in the URL
 const apiUrl = baseApiUrl.endsWith('/') 
