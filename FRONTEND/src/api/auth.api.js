@@ -5,7 +5,7 @@ const authAPI = axios.create({
   baseURL: import.meta.env.VITE_API_URL.endsWith('/') 
     ? `${import.meta.env.VITE_API_URL}api/auth`
     : `${import.meta.env.VITE_API_URL}/api/auth`,
-  timeout: 10000, // 10 seconds timeout
+  timeout: 10000, 
   headers: {
     'Content-Type': 'application/json'
   }
