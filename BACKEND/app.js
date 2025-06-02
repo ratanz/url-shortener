@@ -16,26 +16,27 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Enable CORS for frontend requests
 const allowedOrigins = [
-  'http://localhost:5173', 
-  process.env.FRONTEND_URL 
+  'http://localhost:5173', // Development environment
+  'https://url-shortener-xi-woad.vercel.app', // Hardcoded Vercel URL for testing
+  process.env.FRONTEND_URL // Production frontend URL from environment variable
 ]
 
 console.log('Allowed CORS origins:', allowedOrigins);
 
+// For debugging, allow all origins temporarily
 app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin) return callback(null, true);
-    
-    if (allowedOrigins.indexOf(origin) === -1) {
-      console.log('CORS blocked for origin:', origin);
-      return callback(null, false);
-    }
-    return callback(null, true);
-  },
+  origin: true, // Allow all origins temporarily for debugging
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true
 }));
+
+// Log all incoming requests to help debug CORS issues
+app.use((req, res, next) => {
+  console.log(`Request from origin: ${req.headers.origin} to ${req.method} ${req.url}`);
+  next();
+});
 
 // API routes
 app.use('/api/auth', auth)
