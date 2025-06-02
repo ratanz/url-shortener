@@ -22,10 +22,7 @@ export const createShortUrl = async (url) => {
     })
     return data
   } catch (error) {
-    // Handle Axios specific errors
     if (error.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
       console.error('Server error:', error.response.status, error.response.data)
       throw {
         type: 'SERVER_ERROR',
@@ -41,7 +38,6 @@ export const createShortUrl = async (url) => {
         message: 'No response received from server. Please check your internet connection.'
       }
     } else {
-      // Something happened in setting up the request that triggered an Error
       console.error('Request configuration error:', error.message)
       throw {
         type: 'REQUEST_ERROR',
