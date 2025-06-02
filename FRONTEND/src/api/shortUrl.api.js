@@ -16,7 +16,14 @@ export const createShortUrl = async (url) => {
     
     console.log('Creating short URL with auth:', token ? 'User is authenticated' : 'Anonymous user');
     
-    const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/create`, { url }, {
+    // Ensure we don't have double slashes in the URL
+const apiUrl = import.meta.env.VITE_API_URL.endsWith('/') 
+  ? `${import.meta.env.VITE_API_URL}create`
+  : `${import.meta.env.VITE_API_URL}/create`;
+
+console.log('API URL:', apiUrl);
+
+const {data} = await axios.post(apiUrl, { url }, {
       timeout: 10000, // 10 seconds timeout
       headers
     })
