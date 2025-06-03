@@ -2,9 +2,12 @@ import axios from "axios";
 
 // Create axios instance with base configuration
 const authAPI = axios.create({
-  baseURL: import.meta.env.VITE_API_URL.endsWith('/') 
-    ? `${import.meta.env.VITE_API_URL}api/auth`
-    : `${import.meta.env.VITE_API_URL}/api/auth`,
+  // Fix double /api issue by checking if VITE_API_URL already contains /api
+  baseURL: import.meta.env.VITE_API_URL.includes('/api/') || import.meta.env.VITE_API_URL.endsWith('/api')
+    ? `${import.meta.env.VITE_API_URL.endsWith('/') ? import.meta.env.VITE_API_URL.slice(0, -1) : import.meta.env.VITE_API_URL}/auth`
+    : import.meta.env.VITE_API_URL.endsWith('/') 
+      ? `${import.meta.env.VITE_API_URL}api/auth`
+      : `${import.meta.env.VITE_API_URL}/api/auth`,
   timeout: 10000, 
   headers: {
     'Content-Type': 'application/json'
