@@ -19,23 +19,26 @@ app.use(express.urlencoded({ extended: true }));
 // Enable CORS for frontend requests
 const allowedOrigins = [
   'http://localhost:5173', // Development environment
-  process.env.FRONTEND_URL // Production frontend URL from environment variable
-]
+  'http://localhost:3000', // Local backend for direct testing
+  process.env.FRONTEND_URL, // Production frontend URL from environment variable
+  process.env.APP_URL // Backend URL for self-referential API calls
+].filter(Boolean); // Filter out any undefined values
 
-console.log('Allowed CORS origins:', allowedOrigins);
-
-// For debugging, allow all origins temporarily
+// Implement proper CORS configuration
 app.use(cors({
-  origin: true, // Allow all origins temporarily for debugging
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = `The CORS policy for this site does not allow access from the specified origin: ${origin}`;
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true
 }));
-
-// Log all incoming requests to help debug CORS issues
-app.use((req, res, next) => {
-  console.log(`Request from origin: ${req.headers.origin} to ${req.method} ${req.url}`);
-  next();
-});
 
 // API routes
 app.use('/api/auth', auth)
