@@ -119,12 +119,12 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-6 top-4 text-white/50 hover:text-white transition-colors duration-300"
+                  className="absolute right-4 top-4 text-white/50 hover:text-white transition-colors duration-300"
                 >
                   {showPassword ? (
-                    <EyeOff className="w-4 h-4" />
+                    <EyeOff className="w-6 h-6" />
                   ) : (
-                    <Eye className="w-4 h-4" />
+                    <Eye className="w-6 h-6" />
                   )}
                 </button>
               </motion.div>
