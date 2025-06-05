@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./FRONTEND
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=/api  # This will be proxied to backend by nginx
+    restart: unless-stopped
+    networks:
+      - url-shortener-network
+
+  backend:
+    build:
+      context: ./BACKEND
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - MONGODB_URI=mongodb://mongodb:27017/urlshortener
+      - JWT_SECRET=your_jwt_secret_here
+      - FRONTEND_URL=http://localhost:5173
+      - APP_URL=http://localhost:3000
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+    networks:
+      - url-shortener-network
+
+  mongodb:
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    restart: unless-stopped
+    networks:
+      - url-shortener-network
+
+networks:
+  url-shortener-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
