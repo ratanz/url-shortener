@@ -190,20 +190,9 @@ Contributions are welcome! Please follow these steps:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [React](https://reactjs.org/)
-- [Node.js](https://nodejs.org/)
-- [MongoDB](https://www.mongodb.com/)
-- [Vite](https://vitejs.dev/)
-- [Tailwind CSS](https://tailwindcss.com/)
 
 ## 📧 Contact
 
-Ratan - [@your_twitter](https://twitter.com/your_twitter) - your.email@example.com
+Ratan - [@ratan_codes](https://twitter.com/ratan_codes) - ratanrathod7@outlook.com
 
 Project Link: [https://github.com/ratanz/url-shortener](https://github.com/ratanz/url-shortener)
