@@ -16,15 +16,23 @@ A modern, full-stack URL shortening service that allows users to create short, m
 
 ### Homepage
 
-![Homepage](https://github.com/ratanz/url-shortener/assets/14976309/8e5b6dfb-2e7c-4d2c-8e0a-4d3b3c8a3e1d)
+![Homepage](./FRONTEND/public/images/Screenshot%20(983).png)
 
 ### Dashboard
 
-![Dashboard](https://github.com/ratanz/url-shortener/assets/14976309/8e5b6dfb-2e7c-4d2c-8e0a-4d3b3c8a3e1d)
+![Dashboard](./FRONTEND/public/images/Screenshot%20(984).png)
 
 ### Authentication
 
-![Authentication](https://github.com/ratanz/url-shortener/assets/14976309/8e5b6dfb-2e7c-4d2c-8e0a-4d3b3c8a3e1d)
+![Authentication](./FRONTEND/public/images/Screenshot%20(985).png)
+
+### Profile
+
+![Profile](./FRONTEND/public/images/Screenshot%20(987).png)
+
+### URL Management
+
+![URL Management](./FRONTEND/public/images/Screenshot%20(988).png)
 
 ## 🛠️ Tech Stack
 
